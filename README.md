@@ -17,4 +17,4 @@
 string audioName = "Button";
 AudioManager.Instance.Play(audioName);
 ```
-<img width="715" alt="Screen Shot 2021-09-18 at 00 42 52" src="https://user-images.githubusercontent.com/64248203/133864326-73449262-57f3-4a44-97fe-4fbd0e10dc67.png">
+<img width="715" alt="Screen Shot 2021-09-18 at 00 51 21" src="https://user-images.githubusercontent.com/64248203/133864413-20362fde-5e96-4906-944b-bde6c16ead08.png">
