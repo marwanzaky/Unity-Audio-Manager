@@ -8,8 +8,11 @@ public class AudioManager : MonoBehaviour {
     public static AudioManager Instance { get; private set; }
 
     void Awake() {
-        if (Instance == null) { Instance = this; } else {
-            Debug.LogError("Error: multiple Audio Manager instances found");
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Debug.Log("Multiple AudioManager instances found (Deleted)");
             Destroy(gameObject);
         }
     }
