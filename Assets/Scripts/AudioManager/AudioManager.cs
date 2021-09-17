@@ -21,9 +21,17 @@ public class AudioManager : MonoBehaviour {
 
     [SerializeField] AudioManagerData data;
 
+    void Start() {
+        foreach (var el in data.Datas) {
+            if (el.OnStart) {
+                Play(el.Name);
+            }
+        }
+    }
+
     public (GameObject gameObject, AudioClip audioClip) Play(string name) {
         foreach (var el in data.Datas) {
-            if (el.name == name) {
+            if (el.Name == name) {
                 return Play(el);
             }
         }
@@ -44,22 +52,22 @@ public class AudioManager : MonoBehaviour {
     }
 
     IEnumerator PlayIE(AudioData data, Action onDestory, Action<GameObject, AudioClip> result) {
-        var go = new GameObject(data.clip.name);
+        var go = new GameObject(data.Clip.name);
         var audioSource = go.AddComponent<AudioSource>();
 
-        audioSource.clip = data.clip;
-        audioSource.volume = data.volume;
-        audioSource.pitch = data.pitch;
-        audioSource.loop = data.loop;
+        audioSource.clip = data.Clip;
+        audioSource.volume = data.Volume;
+        audioSource.pitch = data.Pitch;
+        audioSource.loop = data.Loop;
         audioSource.Play();
 
-        if (!data.loop) {
-            Destroy(go, data.clip.length);
+        if (!data.Loop) {
+            Destroy(go, data.Clip.length);
         }
 
         result?.Invoke(go, audioSource.clip);
 
-        yield return new WaitForSeconds(data.clip.length);
+        yield return new WaitForSeconds(data.Clip.length);
 
         onDestory?.Invoke();
     }
