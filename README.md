@@ -14,7 +14,10 @@
 5. Finally, simply play the audio with this line of code
 
 ```cs
+// The name of the audio we want to play
 string audioName = "Button";
-AudioManager.Instance.Play(audioName);  // Note: the audio will be destroyed once completed playing 
+
+// Play the audio. Note: the audio will be destroyed once completed playing
+AudioManager.Instance.Play(audioName); 
 ```
 <img width="715" alt="Screen Shot 2021-09-18 at 00 51 21" src="https://user-images.githubusercontent.com/64248203/133864413-20362fde-5e96-4906-944b-bde6c16ead08.png">
