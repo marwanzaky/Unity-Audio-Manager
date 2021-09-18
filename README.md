@@ -10,12 +10,14 @@
 1. Create a new empty gameObject named "AudioManager", and attach an AudioManager component to it
 2. Go to "Assets > Create > Scriptable Objects > Audio Manager Data" to create a new file to manage your audios' data
 3. Next, add a new audio to the array list providing as well all the information needed for the audio
-4. Go to AudioManager gameObject, and add reference to the AudioManager Data you just created
+4. Go to AudioManager gameObject, and add the reference to the AudioManager Data you just created
 5. Finally, simply play the audio with this line of code
 
-```
+```cs
+// The name of the audio we want to play
 string audioName = "Button";
-AudioManager.Instance.Play(audioName);
-```
 
-<img width="715" alt="Screen Shot 2021-09-17 at 21 52 40" src="https://user-images.githubusercontent.com/64248203/133852409-7ce01954-ecdc-47f2-9689-fe296abd4c63.png">
+// Play the audio. Note: the audio will be destroyed once completed playing
+AudioManager.Instance.Play(audioName); 
+```
+<img width="715" alt="Screen Shot 2021-09-18 at 00 51 21" src="https://user-images.githubusercontent.com/64248203/133864413-20362fde-5e96-4906-944b-bde6c16ead08.png">
