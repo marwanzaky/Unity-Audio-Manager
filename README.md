@@ -13,8 +13,8 @@
 4. Go to AudioManager gameObject, and add the reference to the AudioManager Data you just created
 5. Finally, simply play the audio with this line of code
 
-```
+```cs
 string audioName = "Button";
-AudioManager.Instance.Play(audioName);
+AudioManager.Instance.Play(audioName);  // Note: the audio will be destroyed once completed playing 
 ```
 <img width="715" alt="Screen Shot 2021-09-18 at 00 51 21" src="https://user-images.githubusercontent.com/64248203/133864413-20362fde-5e96-4906-944b-bde6c16ead08.png">
