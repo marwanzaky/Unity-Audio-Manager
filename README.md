@@ -10,7 +10,7 @@
 1. Create a new empty gameObject named "AudioManager", and attach an AudioManager component to it
 2. Go to "Assets > Create > Scriptable Objects > Audio Manager Data" to create a new file to manage your audios' data
 3. Next, add a new audio to the array list providing as well all the information needed for the audio
-4. Go to AudioManager gameObject, and add reference to the AudioManager Data you just created
+4. Go to AudioManager gameObject, and add the reference to the AudioManager Data you just created
 5. Finally, simply play the audio with this line of code
 
 ```
