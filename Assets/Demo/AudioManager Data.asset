@@ -17,23 +17,23 @@ MonoBehaviour:
     onStart: 1
     clip: {fileID: 8300000, guid: 956ad2f73332544fd87365087825cc4f, type: 3}
     volume: 0.5
-    pitch: 2
+    pitchType: 2
     loop: 1
   - name: Button
     onStart: 0
     clip: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
     volume: 1
-    pitch: 2
+    pitchType: 2
     loop: 0
   - name: Jump
     onStart: 0
     clip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
     volume: 1
-    pitch: 2
+    pitchType: 2
     loop: 0
   - name: Land
     onStart: 0
     clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
     volume: 0.5
-    pitch: 3
+    pitchType: 2
     loop: 0

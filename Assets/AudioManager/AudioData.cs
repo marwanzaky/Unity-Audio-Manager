@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Pitch { VeryLow, Low, Medium, High, VeryHigh }
+public enum PitchType { VeryLow, Low, Normal, High, VeryHigh }
 
 [System.Serializable]
 public struct AudioData {
@@ -8,39 +8,29 @@ public struct AudioData {
     [SerializeField] bool onStart;
     [SerializeField] AudioClip clip;
     [SerializeField, Range(0f, 1f)] float volume;
-    [SerializeField] Pitch pitch;
+    [SerializeField] PitchType pitchType;
     [SerializeField] bool loop;
 
-    public string Name {
-        get => name;
-    }
+    public string Name => name;
 
-    public bool OnStart {
-        get => onStart;
-    }
+    public bool OnStart => onStart;
 
-    public AudioClip Clip {
-        get => clip;
-    }
+    public AudioClip Clip => clip;
 
-    public float Volume {
-        get => volume;
-    }
+    public float Volume => volume;
 
     public float Pitch {
         get {
-            switch (pitch) {
-                case global::Pitch.VeryLow: return .5f;
-                case global::Pitch.Low: return .5f;
-                case global::Pitch.Medium: return 1f;
-                case global::Pitch.High: return 2f;
-                case global::Pitch.VeryHigh: return 3f;
+            switch (pitchType) {
+                case PitchType.VeryLow: return .5f;
+                case PitchType.Low: return .5f;
+                case PitchType.Normal: return 1f;
+                case PitchType.High: return 2f;
+                case PitchType.VeryHigh: return 3f;
                 default: return 0f;
             }
         }
     }
 
-    public bool Loop {
-        get => loop;
-    }
+    public bool Loop => loop;
 }
