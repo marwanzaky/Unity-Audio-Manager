@@ -6,7 +6,7 @@
 [Ll]ogs/
 Assets/AssetStoreTools*
 
-.DS_Store/
+.DS_Store
 
 # Visual Studio cache directory
 .vs/
