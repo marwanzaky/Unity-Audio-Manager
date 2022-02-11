@@ -1,74 +1,65 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using MarwanZaky.Audio;
 
 public class AudioManager : MonoBehaviour {
     #region Singletone
 
     public static AudioManager Instance { get; private set; }
 
-    void Awake() {
+    private void Awake() {
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         } else {
-            Debug.Log("Multiple AudioManager instances found (Deleted)");
+            Debug.Log($"Multiple AudioManager instances found (Deleted)");
             Destroy(gameObject);
         }
     }
 
     #endregion
 
+    (GameObject gameObject, AudioClip audioClip) defaultVal = (null, null);
+
     [SerializeField] AudioManagerData data;
 
-    void Start() {
-        foreach (var el in data.Datas) {
-            if (el.OnStart) {
+    private void Start() {
+        foreach (var el in data.AudioDatas)
+            if (el.OnStart)
                 Play(el.Name);
-            }
-        }
     }
 
     public (GameObject gameObject, AudioClip audioClip) Play(string name) {
-        foreach (var el in data.Datas) {
-            if (el.Name == name) {
-                return Play(el);
-            }
-        }
+        foreach (var audioData in data.AudioDatas)
+            if (audioData.Name == name)
+                return Play(audioData);
 
-        return (null, null);
+        Debug.LogError($"Error: the audioClip name of {name} is not found");
+        return defaultVal;
     }
 
-    public (GameObject gameObject, AudioClip audioClip) Play(AudioData data, Action onDestroy = null) {
-        var res = (go: null as GameObject, ac: null as AudioClip);
+    public (GameObject gameObject, AudioClip audioClip) Play(AudioData audioData, Action onDestroy = null) {
+        var newAudioGo = new GameObject(audioData.Clip.name);
+        var audioSource = newAudioGo.AddComponent<AudioSource>();
 
-        var coroutine = PlayIE(data, onDestroy, (go, ac) => {
-            res.go = go; res.ac = ac;
-        });
+        audioSource.clip = audioData.Clip;
+        audioSource.volume = audioData.Volume;
+        audioSource.pitch = audioData.Pitch;
+        audioSource.loop = audioData.Loop;
 
-        StartCoroutine(coroutine);
-
-        return res;
-    }
-
-    IEnumerator PlayIE(AudioData data, Action onDestory, Action<GameObject, AudioClip> result) {
-        var go = new GameObject(data.Clip.name);
-        var audioSource = go.AddComponent<AudioSource>();
-
-        audioSource.clip = data.Clip;
-        audioSource.volume = data.Volume;
-        audioSource.pitch = data.Pitch;
-        audioSource.loop = data.Loop;
         audioSource.Play();
 
-        if (!data.Loop) {
-            Destroy(go, data.Clip.length);
-        }
+        if (!audioData.Loop)
+            DestroyGameObject(newAudioGo, onDestroy, lifetime: audioData.Clip.length);
 
-        result?.Invoke(go, audioSource.clip);
+        return (newAudioGo, audioData.Clip);
+    }
 
-        yield return new WaitForSeconds(data.Clip.length);
+    private IEnumerator DestroyGameObject(GameObject gameObject, Action onDestroy, float lifetime) {
+        yield return new WaitForSeconds(lifetime);
 
-        onDestory?.Invoke();
+        Destroy(gameObject);
+        onDestroy?.Invoke();
     }
 }

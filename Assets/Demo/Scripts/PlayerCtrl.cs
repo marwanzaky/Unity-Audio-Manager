@@ -7,18 +7,18 @@ public class PlayerCtrl : MonoBehaviour {
     [Header("Audio Clips"), SerializeField] string jumpClipName = "Jump";
     [SerializeField] string landClipName = "Land";
 
-    void Update() {
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
     }
 
-    void Jump() {
+    private void Jump() {
         AudioManager.Instance.Play(jumpClipName);
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * jumpForce);
     }
 
-    void OnCollisionEnter(Collision other) {
+    private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Ground"))
             AudioManager.Instance.Play(landClipName);
     }
